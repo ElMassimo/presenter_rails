@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "presenter_rails"
-  s.version = '0.0.1'
+  s.version = '0.0.2'
   s.licenses = ['MIT']
   s.summary = "ViewModels had a baby with helper_method"
   s.description = "Presenter helps you expose view models to your views with a declarative approach."
