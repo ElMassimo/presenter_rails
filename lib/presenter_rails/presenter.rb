@@ -4,21 +4,23 @@ module PresenterRails
     include SimpleMemoizer
 
     module ClassMethods
-      def present(*methods)
-        methods.flatten!
-        presenter_methods = *Presenter.presenter_method_names(methods)
-        enforce_private_methods!(presenter_methods)
 
-        presenter_method *methods
-        memoize presenter_methods
+      # Can take a list of presenter methods, or a name and block for a presenter method
+      def present(*methods, &block)
+        presenter_methods = methods.map {|name| Presenter.method_name_for(name) }
+        define_presenter_method!(presenter_methods, &block) if block_given?
+
+        expose_presenter *methods
+        memoize *presenter_methods
       end
 
-      def presenter_method(*method_names)
+      # Exposes a presenter method to the view for each provided name
+      def expose_presenter(*method_names)
         presenters_module = Module.new do
           method_names.each do |name|
             module_eval <<-ruby_eval, __FILE__, __LINE__ + 1
               def #{name}
-                controller.send('#{Presenter.presenter_method_name(name)}')
+                controller.send('#{Presenter.method_name_for(name)}')
               end
             ruby_eval
           end
@@ -28,23 +30,20 @@ module PresenterRails
 
       private
 
-      def enforce_private_methods!(methods)
-        method_set = methods.to_set
-        if self.instance_methods.any? {|method| method_set.include?(method) }
-          methods = method_set.select {|method| self.instance_method?(method) }
-          Kernel.abort "[ERROR] You are exposing presenters by the `#{methods.join(', ')}` method, " \
-            "which is either a non private method or overrides an existing method of the same name. " \
-            "Consider using a different presenter name\n" \
-            "#{caller.first}"
+      # Defines a private presenter method that invokes the provided block
+      def define_presenter_method!(methods, &block)
+        if methods.size != 1
+          Kernel.abort "[ERROR] You are providing a block for the `#{methods.join(', ')}` methods, " \
+            "but you can only provide a block for a single presenter at a time.\n #{caller.second}"
         end
+        presenter_method = methods.first
+        define_method presenter_method, &block
+        private presenter_method
       end
     end
 
-    def self.presenter_method_names(method_names)
-      method_names.map {|name| presenter_method_name(name) }
-    end
-
-    def self.presenter_method_name(name)
+    # Name of the presenter methods
+    def self.method_name_for(name)
       "#{name}_presenter"
     end
   end
