@@ -47,7 +47,7 @@ When you provide a block, it defines a `"#{name}_presenter"` private method in y
 After that, it creates helper methods for your views, each method calls its `"#{name}_presenter"` counterpart in the controller.
 
 #### Memoization
-Each presenter method is memoized, so that your method will be called only once, and your views get the same instance every time.
+Each presenter method is memoized, so the method is called only once and your views get the same instance every time.
 
 #### Corolary
 Since the helper methods defined are only available for the view, you can define methods with the same name in your controller :smiley:.
