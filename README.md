@@ -1,7 +1,7 @@
-Presenter
+PresenterRails
 =====================
 
-Presenter helps you expose view models to your views with ease.
+PresenterRails helps you expose view models to your views with ease.
 
 ```ruby
    # app/controllers/person_controller.rb
@@ -35,10 +35,12 @@ If you don't provide a block for present, it will assume that you want to expose
    end
 ```
 
-Presenter works very well with [singular_resource](https://github.com/ElMassimo/singular_resource).
+PresenterRails works very well with [singular_resource](https://github.com/ElMassimo/singular_resource).
 
 ## Background
-Presenter attempts to simplify the exposure of variables to the views. It doesn't really care about what you are exposing, although it's specially useful to implement [two-step views](http://martinfowler.com/eaaCatalog/twoStepView.html) while using [draper](https://github.com/drapergem/draper) together with [singular_resource](https://github.com/ElMassimo/singular_resource).
+PresenterRails attempts to simplify the exposure of variables to the views. It doesn't really care
+about what you are exposing, although it's specially useful to implement [two-step views](http://martinfowler.com/eaaCatalog/twoStepView.html) while using
+[draper](https://github.com/drapergem/draper) together with [singular_resource](https://github.com/ElMassimo/singular_resource).
 
 ### How it works
 
