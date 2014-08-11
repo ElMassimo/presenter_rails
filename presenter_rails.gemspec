@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "presenter_rails"
-  s.version = '1.0.0'
+  s.version = '1.0.1'
   s.licenses = ['MIT']
   s.summary = "ViewModels had a baby with helper_method"
   s.description = "Presenter helps you expose view models to your views with a declarative approach."
@@ -17,5 +17,5 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency 'activesupport'
-  s.add_runtime_dependency 'simple_memoizer'
+  s.add_runtime_dependency 'pakiderm'
 end

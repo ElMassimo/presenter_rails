@@ -1,7 +1,12 @@
+require 'pakiderm'
+
 module PresenterRails
   module Presenter
     extend ActiveSupport::Concern
-    include SimpleMemoizer
+
+    included do
+      extend Pakiderm
+    end
 
     module ClassMethods
 
@@ -11,7 +16,7 @@ module PresenterRails
         define_presenter_method!(presenter_methods, &block) if block_given?
 
         expose_presenter *methods
-        memoize *presenter_methods
+        memoize *presenter_methods, assignable: true
       end
 
       # Exposes a presenter method to the view for each provided name
