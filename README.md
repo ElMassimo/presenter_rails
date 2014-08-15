@@ -1,4 +1,4 @@
-Presenter
+Presenter [![Gem Version](https://badge.fury.io/rb/presenter_rails.svg)](http://badge.fury.io/rb/presenter_rails) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ElMassimo/queryable/blob/master/LICENSE.txt)
 =====================
 
 Presenter helps you expose view models to your views in a convenient way, while
