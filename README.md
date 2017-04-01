@@ -1,41 +1,47 @@
-Presenter [![Gem Version](https://badge.fury.io/rb/presenter_rails.svg)](http://badge.fury.io/rb/presenter_rails) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ElMassimo/queryable/blob/master/LICENSE.txt)
+Presenter [![Gem Version](https://badge.fury.io/rb/presenter_rails.svg)](http://badge.fury.io/rb/presenter_rails) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ElMassimo/presenter_rails/blob/master/LICENSE.txt)
 =====================
 
 Presenter helps you expose view models to your views in a convenient way, while
 still allowing you to define methods with the same name inside your controllers.
 
 ```ruby
-   # app/controllers/person_controller.rb
-   class PersonController < ApplicationController
+ # app/controllers/people_controller.rb
+ class PeopleController < ApplicationController
 
-      present :person do
-        PersonPresenter.decorate(...)
-      end
-   end
+    present(:person) {
+      PersonDecorator.decorate(person)
+    }
+
+    ...
+
+    def person
+      People.find(params[:id])
+    end
+ end
 ```
 
 ```haml
-   / app/views/people/show.html.haml
-   .person
-     .person-name= person.name
-     .person-info= person.biography
+ / app/views/people/show.html.haml
+ .person
+   .person-name= person.name
+   .person-info= person.biography
 ```
-If you don't provide a block for present, it will assume that you want to expose a `"#{name}_presenter"` method.
+
+The method is also available in the controller, with a `_presenter` suffix:
 ```ruby
-   # app/controllers/person_controller.rb
-   class PersonController < ApplicationController
-      present :person, :people
+ # app/controllers/people_controller.rb
+ class PeopleController < ApplicationController
 
-      private
+    ...
 
-      def person_presenter
-        PersonPresenter.decorate(...)
-      end
+    def update
+      person.update(attrs)
+      redirect_to person_presenter.path, notice: "Successfully updated."
+    end
 
-      def people_presenter
-        People.all
-      end
-   end
+    ...
+
+ end
 ```
 
 ## Background
@@ -45,12 +51,12 @@ about what you are exposing, although it's specially useful to implement [two-st
 
 ### How it works
 
-When you provide a block, it defines a `"#{name}_presenter"` private method in your controller the same way you would do manually.
+When you provide a block, it defines a `"#{name}_presenter"` private method in your controller.
 
-After that, it creates helper methods for your views, each method calls its `"#{name}_presenter"` counterpart in the controller.
+After that, it creates a helper method for your views, which calls the `"#{name}_presenter"` counterpart in the controller.
 
 #### Memoization
-Each presenter method is memoized, so the method is called only once and your views get the same instance every time.
+Each presenter method is memoized, so the method is called only once and your views get the same instance every time. The block is evaluated only if the method is called.
 
 #### Corolary
 Since the helper methods defined are only available for the view, you can define methods with the same name in your controller :smiley:.
