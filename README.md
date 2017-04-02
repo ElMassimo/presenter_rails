@@ -32,7 +32,9 @@ The method is also available in the controller, with a `_presenter` suffix:
  # app/controllers/people_controller.rb
  class PeopleController < ApplicationController
 
-    ...
+    present(:person) {
+      PersonDecorator.decorate(person)
+    }
 
     def update
       person.update(attrs)
