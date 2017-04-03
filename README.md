@@ -1,4 +1,4 @@
-Presenter [![Gem Version](https://badge.fury.io/rb/presenter_rails.svg)](http://badge.fury.io/rb/presenter_rails) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ElMassimo/presenter_rails/blob/master/LICENSE.txt)
+Presenter [![Gem Version](https://badge.fury.io/rb/presenter_rails.svg)](http://badge.fury.io/rb/presenter_rails) [![Build Status](https://travis-ci.org/ElMassimo/presenter_rails.svg?branch=master)](https://travis-ci.org/ElMassimo/presenter_rails) [![Coverage Status](https://coveralls.io/repos/github/ElMassimo/presenter_rails/badge.svg?branch=master)](https://coveralls.io/github/ElMassimo/presenter_rails?branch=master) [![Inline docs](http://inch-ci.org/github/ElMassimo/presenter_rails.svg)](http://inch-ci.org/github/ElMassimo/presenter_rails) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ElMassimo/presenter_rails/blob/master/LICENSE.txt)
 =====================
 
 Presenter helps you expose view models to your views in a convenient way, while

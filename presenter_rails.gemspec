@@ -18,8 +18,9 @@ Gem::Specification.new do |s|
 
   s.add_dependency "activesupport"
 
-  s.add_development_dependency "railties", ">= 4.0"
   s.add_development_dependency "actionmailer"
+  s.add_development_dependency "coveralls"
+  s.add_development_dependency "railties", ">= 4.0"
   s.add_development_dependency "rspec-given", "~> 3.0"
   s.add_development_dependency "rspec-rails", "~> 3.0"
 end
