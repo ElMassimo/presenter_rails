@@ -1,3 +1,8 @@
+## PresenterRails 3.0.0 (2021-02-24) ##
+
+*   Remove `ruby_version` restriction from gemspec to allow usage in Ruby 3.0.
+*   Remove additional Controller module.
+
 ## PresenterRails 2.0.0 (2017-04-01) ##
 
 *   Now every call to `present` must pass a block, and defines a single method.

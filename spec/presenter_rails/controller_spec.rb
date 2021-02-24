@@ -1,7 +1,7 @@
 require "spec_helper"
 require "rspec/rails"
 
-RSpec.describe PresenterRails::Controller do
+RSpec.describe PresenterRails do
   class Thing; end
   class DifferentThing; end
 
@@ -14,7 +14,7 @@ RSpec.describe PresenterRails::Controller do
   end
 
   class BaseController
-    extend PresenterRails::Controller
+    extend PresenterRails
 
     def self.helper(helper_module)
       @helper_modules ||= []
